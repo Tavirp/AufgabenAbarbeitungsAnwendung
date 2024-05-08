@@ -1,0 +1,25 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 48vw;
+    width: 50%;
+    /* background-color: #fb617d; */
+  }
+  
+  .spacerContainer {
+    display: flex;
+    height: 20px;
+    width: 100%;
+    /* background-color: #268a50; */
+  }
+  
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vw;
+    width: 100%;
+    border-radius: 10%;
+    background-color: #7561fb72;
+  }

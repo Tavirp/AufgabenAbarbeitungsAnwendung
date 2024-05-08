@@ -1,0 +1,34 @@
+
+
+.navContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 45vw;      
+    width: 12%;      
+    margin-left: 0%;
+    padding: 15px;
+    background-color: var(--sec-bg-color);
+  }
+
+
+
+
+/* .usercontainer{
+    display: flex; */
+    /* justify-content: flex-end;
+    flex-direction: row;           
+    height: 50%;
+  }
+
+
+  .pagescontainer{
+    display: flex;
+    height: 50%;
+  }
+
+*/
+
+
+

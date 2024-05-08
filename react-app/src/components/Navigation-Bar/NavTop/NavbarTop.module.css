@@ -1,0 +1,28 @@
+    /* Note: */
+    /* width: max-content; */
+
+
+.topContainer {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 8px;
+    /* background-color: aliceblue; */
+   }
+  
+  .spacer {
+    width: 4px;
+    height: 10px;
+  }
+  
+  .usrIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    /* border-radius: 16px;background-color: brown; */
+  }
+

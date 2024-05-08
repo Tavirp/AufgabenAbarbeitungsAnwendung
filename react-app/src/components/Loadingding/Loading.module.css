@@ -1,0 +1,34 @@
+
+
+
+.Applogo {
+    height: 20vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .Applogo {
+      animation: Applogo-spin infinite 20s linear;
+    }
+  }
+  
+  
+  .Applink {
+    color: #61dafb;
+  }
+  
+  @keyframes Applogo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+.LoadingDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}

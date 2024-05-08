@@ -1,0 +1,13 @@
+
+
+.menuContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 45vw;      
+    width: 20%;      
+    margin-left: 0%;
+    padding: 15px;
+    background-color: var(--sec-bg-color);
+  }
