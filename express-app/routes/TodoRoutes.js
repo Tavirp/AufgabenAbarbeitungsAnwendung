@@ -1,53 +1,11 @@
-const { Router } = require("express");
+
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const todoSequelize = require("../../database/setup/database");
-const TodoModel = require("../../database/models/TodoModel");
+const Todos = require("../models/Todos");
+const { Router } = require("express");
 
 const TodosRouter = Router();
 
-let todos = [
-  {
-    id: 1,
-    userId: 1,
-    task: "Wäsche waschen",
-    isDone: true,
-    dueDate: new Date("2024-03-03"),
-  },
-  {
-    id: 2,
-    userId: 1,
-    task: "Müll rausbrigen",
-    isDone: false,
-    dueDate: new Date("2024-03-03"),
-  },
-  {
-    id: 3,
-    userId: 2,
-    task: "Tanzen",
-    isDone: false,
-    dueDate: new Date("2024-03-03"),
-  },
-  {
-    id: 4,
-    userId: 2,
-    task: "Auto fahren",
-    isDone: true,
-    dueDate: new Date("2024-03-03"),
-  },
-];
-
 // GET REQUESTS
-// /v1/todos/bytodoid
-TodosRouter.get("/byid", async (req, res) => {
-  const todoId = req.query.todoId;
-  if (!todoId) {
-    res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-    return;
-  }
-  const todo = await TodoModel.findOne({ where: { id: todoId } });
-
-  res.status(StatusCodes.OK).json({ todo: todo });
-});
 
 // Alle Todos von einer UserId
 TodosRouter.get("/byuserid", async (req, res) => {
@@ -58,29 +16,36 @@ TodosRouter.get("/byuserid", async (req, res) => {
       .send(ReasonPhrases.BAD_REQUEST + " Keine userID");
     return;
   }
-
-  const userTodos = await TodoModel.filterAll({ where: { userId: userId } });
+ 
+  const userTodos = await Todos.filterAll({ where: { userId: userId } });
 
   res.status(StatusCodes.OK).json(userTodos);
 });
 
-TodosRouter.get("/all", async (req, res) => {
-  const todos = await TodoModel.findAll();
-  res.status(StatusCodes.OK).send(todos);
+// Get Todo by id
+TodosRouter.get("/byid", async (req, res) => {
+  const todoId = req.query.todoId;
+  if (!todoId) {
+    res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+    return;
+  }
+  const todo = await Todos.findOne({ where: { id: todoId } });
+
+  res.status(StatusCodes.OK).json({ todo: todo });
 });
 
 // PUT REQUESTS
 TodosRouter.put("/mark", async (req, res) => {
   const { id, newIsDone } = req.body;
 
-  await TodoModel.mark(
+  await Todos.mark(
     {
       isDone: newIsDone,
     },
     { where: { id: id } }
   );
 
- const todo = await TodoModel.findByPk(id);
+ const todo = await Todos.findByPk(id);
 
   res.status(StatusCodes.OK).json({ updatedTodo: todo });
 });
@@ -88,7 +53,7 @@ TodosRouter.put("/mark", async (req, res) => {
 TodosRouter.put("/update", async (req, res) => {
   const { todoId, newTask, newIsDone, newDueDate } = req.body;
 
-  await TodoModel.update(
+  await Todos.update(
     {
       task: newTask,
       isDone: newIsDone,
@@ -97,7 +62,7 @@ TodosRouter.put("/update", async (req, res) => {
     { where: { id: todoId } }
   );
 
-  const todo = await TodoModel.findByPk(todoId);
+  const todo = await Todos.findByPk(todoId);
 
   res.status(StatusCodes.OK).json({ updatedTodo: todo });
 });
@@ -113,7 +78,7 @@ TodosRouter.post("/create", async (req, res) => {
     userId: newUserId,
   };
 
-  const todo = await TodoModel.create(newTodo);
+  const todo = await Todos.create(newTodo);
 
   res.status(StatusCodes.OK).json({ todo: todo });
 });
@@ -122,9 +87,9 @@ TodosRouter.post("/create", async (req, res) => {
 TodosRouter.delete("/delete", async (req, res) => {
   const { todoId } = req.body; //req.body.todoId
 
-  await TodoModel.destroy({ where: { id: todoId } });
+  await Todos.destroy({ where: { id: todoId } });
 
   res.status(StatusCodes.OK).json({ deletedTodosId: todoId });
 });
 
-module.exports = { TodosRouter };
+module.exports = TodosRouter;

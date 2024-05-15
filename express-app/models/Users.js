@@ -26,7 +26,7 @@ const User = sequelize.define("User", {
     allowNull: false,
   },
   lastLogin: {
-    type: DataTypes.DATETIME,
+    type: DataTypes.DATE,
     allowNull: false,
   },
 });

@@ -1,12 +1,12 @@
 const { DataTypes } = require("sequelize");
-const todoSequelize = require("../setup/database");
+const todoSequelize = require("../config/database");
 
 // Define the Todo model
 
 const TodoModel = todoSequelize.define(
   "Todo",
   {
-    id: {
+    todoId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
